@@ -38,7 +38,7 @@ class InsertionActivity : AppCompatActivity() {
 
     private fun saveEmployeeData(){
         val newPcModel = pcModel.text.toString()
-        val newPcBrand = pcProcessor.text.toString()
+        val newPcBrand = pcBrand.text.toString()
         val newPcProcessor = pcProcessor.text.toString()
         val newPcRAM = pcRAM.text.toString()
         val newPcROM = pcROM.text.toString()

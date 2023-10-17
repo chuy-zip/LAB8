@@ -39,15 +39,15 @@ class FetchingActivity : AppCompatActivity() {
         empRecyclerView.visibility = View.GONE
         tvLoadingData.visibility = View.VISIBLE
 
-        dbRef = FirebaseDatabase.getInstance().getReference("Employees")
+        dbRef = FirebaseDatabase.getInstance().getReference("Computers")
 
         dbRef.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 pcList.clear()
                 if (snapshot.exists()){
-                    for (empSnap in snapshot.children){
-                        val empData = empSnap.getValue(PcModel::class.java)
-                        pcList.add(empData!!)
+                    for (pcSnap in snapshot.children){
+                        val pcData = pcSnap.getValue(PcModel::class.java)
+                        pcList.add(pcData!!)
                     }
                     val mAdapter = PcAdapter(pcList)
                     empRecyclerView.adapter = mAdapter

@@ -35,7 +35,7 @@ class PcDetailsActivity : AppCompatActivity() {
 
         btnDelete.setOnClickListener {
             deleteRecord(
-                intent.getStringExtra("empId").toString()
+                intent.getStringExtra("pcID").toString()
             )
         }
     }
@@ -106,6 +106,7 @@ class PcDetailsActivity : AppCompatActivity() {
     }
 
     private fun initView() {
+        tvPcID = findViewById(R.id.tvPcId)
         tvPcModel = findViewById(R.id.tvPcModel)
         tvPcBrand = findViewById(R.id.tvPcBrand)
         tvPcProcessor = findViewById(R.id.tvPcProcessor)
