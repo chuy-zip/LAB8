@@ -8,40 +8,64 @@
     tools:context="InsertionActivity">
 
     <EditText
-        android:id="@+id/etEmpName"
+        android:id="@+id/pcModel"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:hint="Enter name"
+        android:hint="Enter PC Model"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/etEmpAge"
+        android:id="@+id/pcBrand"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:hint="Enter age"
+        android:hint="Brand"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etEmpName" />
+        app:layout_constraintTop_toBottomOf="@+id/pcModel" />
 
     <EditText
-        android:id="@+id/etEmpSalary"
+        android:id="@+id/pcProcessor"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:hint="Enter salary"
+        android:hint="Processor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etEmpAge" />
+        app:layout_constraintTop_toBottomOf="@+id/pcBrand" />
+
+    <EditText
+        android:id="@+id/pcRAM"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="RAM"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pcProcessor" />
+
+    <EditText
+        android:id="@+id/pcROM"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Storage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pcRAM" />
 
     <Button
         android:id="@+id/btnSave"
@@ -51,5 +75,5 @@
         android:text="Save Data"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etEmpSalary" />
+        app:layout_constraintTop_toBottomOf="@+id/pcROM" />
 </androidx.constraintlayout.widget.ConstraintLayout>
