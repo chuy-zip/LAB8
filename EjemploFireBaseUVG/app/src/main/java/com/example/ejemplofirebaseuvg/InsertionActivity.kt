@@ -60,11 +60,11 @@ class InsertionActivity : AppCompatActivity() {
 
         val pcId = dbRef.push().key!!
 
-        val Computer = PcModel (newPcModel, newPcBrand, newPcProcessor, newPcRAM, newPcROM)
+        val computer = PcModel (newPcModel, newPcBrand, newPcProcessor, newPcRAM, newPcROM)
 
-        dbRef.child(pcId).setValue(Computer)
+        dbRef.child(pcId).setValue(computer)
             .addOnCompleteListener{
-                Toast.makeText(this, "Data inserted succesfully", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Data inserted successfully", Toast.LENGTH_LONG).show()
 
                 pcModel.text.clear()
                 pcBrand.text.clear()
@@ -72,7 +72,7 @@ class InsertionActivity : AppCompatActivity() {
                 pcRAM.text.clear()
                 pcROM.text.clear()
             }.addOnFailureListener{ err ->
-                Toast.makeText(this, "Errpr ${err.message}", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Error ${err.message}", Toast.LENGTH_LONG).show()
             }
     }
 }

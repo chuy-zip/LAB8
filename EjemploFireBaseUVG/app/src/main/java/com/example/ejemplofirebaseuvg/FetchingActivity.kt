@@ -58,6 +58,7 @@ class FetchingActivity : AppCompatActivity() {
                             val intent = Intent(this@FetchingActivity, PcDetailsActivity::class.java)
 
                             //put extras
+                            intent.putExtra("pcID", pcList[position].pcID)
                             intent.putExtra("pcModel", pcList[position].pcModel)
                             intent.putExtra("pcBrand", pcList[position].pcBrand)
                             intent.putExtra("pcProcessor", pcList[position].pcProcessor)
