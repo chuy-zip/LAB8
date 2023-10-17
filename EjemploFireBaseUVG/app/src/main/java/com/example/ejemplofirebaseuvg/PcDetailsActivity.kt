@@ -3,9 +3,14 @@ package com.example.ejemplofirebaseuvg
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import com.google.firebase.database.FirebaseDatabase
 
 class PcDetailsActivity : AppCompatActivity() {
+    private lateinit var tvPcID: TextView
     private lateinit var tvPcModel: TextView
     private lateinit var tvPcBrand: TextView
     private lateinit var tvPcProcessor: TextView
@@ -19,6 +24,78 @@ class PcDetailsActivity : AppCompatActivity() {
 
         initView()
         setValuesToViews()
+
+        btnUpdate.setOnClickListener {
+            openUpdateDialog(
+                intent.getStringExtra("pcID").toString(),
+                intent.getStringExtra("pcModel").toString()
+            )
+        }
+    }
+
+    private fun openUpdateDialog(
+        pcID: String,
+        pcModel: String
+    ) {
+        val mDialog = AlertDialog.Builder(this)
+        val inflater = layoutInflater
+        val mDialogView = inflater.inflate(R.layout.update_dialog, null)
+
+        mDialog.setView(mDialogView)
+
+        val etPcModel = mDialogView.findViewById<EditText>(R.id.etPcModel)
+        val etPcBrand = mDialogView.findViewById<EditText>(R.id.etPcBrand)
+        val etPcProcessor = mDialogView.findViewById<EditText>(R.id.etPcProcessor)
+        val etPcRAM = mDialogView.findViewById<EditText>(R.id.etPcRAM)
+        val etPcROM = mDialogView.findViewById<EditText>(R.id.etPcROM)
+
+        val btnUpdateData = mDialogView.findViewById<Button>(R.id.btnUpdateData)
+
+        etPcModel.setText(intent.getStringExtra("pcModel").toString())
+        etPcBrand.setText(intent.getStringExtra("pcBrand").toString())
+        etPcProcessor.setText(intent.getStringExtra("pcProcessor").toString())
+        etPcRAM.setText(intent.getStringExtra("pcRAM").toString())
+        etPcROM.setText(intent.getStringExtra("pcROM").toString())
+
+        mDialog.setTitle("Updating $pcModel Record")
+
+        val alertDialog = mDialog.create()
+        alertDialog.show()
+
+        btnUpdateData.setOnClickListener {
+            updateEmpData(
+                pcID,
+                etPcModel.text.toString(),
+                etPcBrand.text.toString(),
+                etPcProcessor.text.toString(),
+                etPcRAM.text.toString(),
+                etPcROM.text.toString()
+            )
+
+            Toast.makeText(applicationContext, "Pc Data Updated", Toast.LENGTH_LONG).show()
+
+            //we are setting updated data to our textviews
+            tvPcModel.text = etPcModel.text.toString()
+            tvPcBrand.text = etPcBrand.text.toString()
+            tvPcProcessor.text = etPcProcessor.text.toString()
+            tvPcRAM.text = etPcRAM.text.toString()
+            tvPcROM.text = etPcROM.text.toString()
+
+            alertDialog.dismiss()
+        }
+    }
+
+    private fun updateEmpData(
+        pcID: String,
+        pcModel: String,
+        pcBrand: String,
+        pcProcessor: String,
+        salarypcRAM: String,
+        salarypcROM: String
+    ) {
+        val dbRef = FirebaseDatabase.getInstance().getReference("Employees").child(pcModel)
+        val empInfo = EmployeeModel(id, name, age, salary)
+        dbRef.setValue(empInfo)
     }
 
     private fun initView() {
@@ -33,6 +110,7 @@ class PcDetailsActivity : AppCompatActivity() {
     }
 
     private fun setValuesToViews() {
+        tvPcID.text = intent.getStringExtra("pcID")
         tvPcModel.text = intent.getStringExtra("pcModel")
         tvPcBrand.text = intent.getStringExtra("pcBrand")
         tvPcProcessor.text = intent.getStringExtra("pcProcessor")
