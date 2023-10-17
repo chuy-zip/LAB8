@@ -90,11 +90,11 @@ class PcDetailsActivity : AppCompatActivity() {
         pcModel: String,
         pcBrand: String,
         pcProcessor: String,
-        salarypcRAM: String,
-        salarypcROM: String
+        pcRAM: String,
+        pcROM: String
     ) {
         val dbRef = FirebaseDatabase.getInstance().getReference("Employees").child(pcModel)
-        val empInfo = EmployeeModel(id, name, age, salary)
+        val empInfo = PcModel(pcID, pcModel, pcBrand, pcProcessor, pcRAM, pcROM)
         dbRef.setValue(empInfo)
     }
 
