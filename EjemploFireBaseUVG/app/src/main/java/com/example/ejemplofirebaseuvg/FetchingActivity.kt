@@ -17,7 +17,7 @@ class FetchingActivity : AppCompatActivity() {
 
     private lateinit var empRecyclerView: RecyclerView
     private lateinit var tvLoadingData: TextView
-    private lateinit var PcList: ArrayList<PcModel>
+    private lateinit var pcList: ArrayList<PcModel>
     private lateinit var dbRef: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,7 +29,7 @@ class FetchingActivity : AppCompatActivity() {
         empRecyclerView.setHasFixedSize(true)
         tvLoadingData = findViewById(R.id.LoadingData)
 
-        PcList = arrayListOf<PcModel>()
+        pcList = arrayListOf<PcModel>()
 
         getEmployeesData()
     }
@@ -43,13 +43,13 @@ class FetchingActivity : AppCompatActivity() {
 
         dbRef.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                PcList.clear()
+                pcList.clear()
                 if (snapshot.exists()){
                     for (empSnap in snapshot.children){
                         val empData = empSnap.getValue(PcModel::class.java)
-                        PcList.add(empData!!)
+                        pcList.add(empData!!)
                     }
-                    val mAdapter = PcAdapter(PcList)
+                    val mAdapter = PcAdapter(pcList)
                     empRecyclerView.adapter = mAdapter
 
                     mAdapter.setOnItemClickListener(object : PcAdapter.OnItemClickListener{
@@ -58,11 +58,11 @@ class FetchingActivity : AppCompatActivity() {
                             val intent = Intent(this@FetchingActivity, PcDetailsActivity::class.java)
 
                             //put extras
-                            intent.putExtra("pcModel", PcList[position].pcModel)
-                            intent.putExtra("pcBrand", PcList[position].pcBrand)
-                            intent.putExtra("pcProcessor", PcList[position].pcProcessor)
-                            intent.putExtra("pcRAM", PcList[position].pcRAM)
-                            intent.putExtra("pcROM", PcList[position].pcROM)
+                            intent.putExtra("pcModel", pcList[position].pcModel)
+                            intent.putExtra("pcBrand", pcList[position].pcBrand)
+                            intent.putExtra("pcProcessor", pcList[position].pcProcessor)
+                            intent.putExtra("pcRAM", pcList[position].pcRAM)
+                            intent.putExtra("pcROM", pcList[position].pcROM)
                             startActivity(intent)
                         }
 

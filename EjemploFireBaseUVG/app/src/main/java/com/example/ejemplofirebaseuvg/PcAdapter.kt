@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-    class PcAdapter(private val PcList: ArrayList<PcModel>) :
+    class PcAdapter(private val pcList: ArrayList<PcModel>) :
         RecyclerView.Adapter<PcAdapter.ViewHolder>() {
 
         private lateinit var mListener: OnItemClickListener
@@ -24,17 +24,17 @@ import androidx.recyclerview.widget.RecyclerView
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            val currentPc = PcList[position]
-            holder.PcModel.text = currentPc.pcModel
+            val currentPc = pcList[position]
+            holder.pcModel.text = currentPc.pcModel
         }
 
         override fun getItemCount(): Int {
-            return PcList.size
+            return pcList.size
         }
 
         class ViewHolder(itemView: View, clickListener: OnItemClickListener) : RecyclerView.ViewHolder(itemView) {
 
-            val PcModel : TextView = itemView.findViewById(R.id.pcName)
+            val pcModel : TextView = itemView.findViewById(R.id.pcName)
 
             init {
                 itemView.setOnClickListener {
