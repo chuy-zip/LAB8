@@ -1,5 +1,6 @@
 package com.example.ejemplofirebaseuvg
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -29,6 +30,12 @@ class PcDetailsActivity : AppCompatActivity() {
             openUpdateDialog(
                 intent.getStringExtra("pcID").toString(),
                 intent.getStringExtra("pcModel").toString()
+            )
+        }
+
+        btnDelete.setOnClickListener {
+            deleteRecord(
+                intent.getStringExtra("empId").toString()
             )
         }
     }
@@ -90,11 +97,11 @@ class PcDetailsActivity : AppCompatActivity() {
         pcModel: String,
         pcBrand: String,
         pcProcessor: String,
-        salarypcRAM: String,
-        salarypcROM: String
+        pcRAM: String,
+        pcROM: String
     ) {
-        val dbRef = FirebaseDatabase.getInstance().getReference("Employees").child(pcModel)
-        val empInfo = EmployeeModel(id, name, age, salary)
+        val dbRef = FirebaseDatabase.getInstance().getReference("Computers").child(pcID)
+        val empInfo = PcModel(pcID, pcModel, pcBrand, pcProcessor, pcRAM, pcROM)
         dbRef.setValue(empInfo)
     }
 
@@ -116,5 +123,22 @@ class PcDetailsActivity : AppCompatActivity() {
         tvPcProcessor.text = intent.getStringExtra("pcProcessor")
         tvPcRAM.text = intent.getStringExtra("pcRAM")
         tvPcROM.text = intent.getStringExtra("pcROM")
+    }
+
+    private fun deleteRecord(
+        id: String
+    ){
+        val dbRef = FirebaseDatabase.getInstance().getReference("Computers").child(id)
+        val mTask = dbRef.removeValue()
+
+        mTask.addOnSuccessListener {
+            Toast.makeText(this, "Pc data deleted", Toast.LENGTH_LONG).show()
+
+            val intent = Intent(this, FetchingActivity::class.java)
+            finish()
+            startActivity(intent)
+        }.addOnFailureListener{ error ->
+            Toast.makeText(this, "Deleting Err ${error.message}", Toast.LENGTH_LONG).show()
+        }
     }
 }
