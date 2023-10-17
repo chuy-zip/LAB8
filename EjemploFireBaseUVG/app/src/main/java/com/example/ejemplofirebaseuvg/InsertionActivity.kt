@@ -60,7 +60,7 @@ class InsertionActivity : AppCompatActivity() {
 
         val pcId = dbRef.push().key!!
 
-        val computer = PcModel (newPcModel, newPcBrand, newPcProcessor, newPcRAM, newPcROM)
+        val computer = PcModel (pcId, newPcModel, newPcBrand, newPcProcessor, newPcRAM, newPcROM)
 
         dbRef.child(pcId).setValue(computer)
             .addOnCompleteListener{
