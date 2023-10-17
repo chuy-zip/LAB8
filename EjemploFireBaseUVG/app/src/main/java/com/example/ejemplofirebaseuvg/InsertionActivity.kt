@@ -26,6 +26,7 @@ class InsertionActivity : AppCompatActivity() {
         pcBrand = findViewById(R.id.pcBrand)
         pcProcessor = findViewById(R.id.pcProcessor)
         pcRAM = findViewById(R.id.pcRAM)
+        btnSaveData = findViewById(R.id.btnSave)
         pcROM = findViewById(R.id.pcROM)
 
         dbRef = FirebaseDatabase.getInstance().getReference("Computers")
